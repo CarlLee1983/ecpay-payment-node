@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/CarlLee1983/ecpay-payment-node/compare/v1.0.0...v1.1.0) (2025-12-08)
+
+
+### Features
+
+* Translate README to English with expanded usage examples and introduce a separate Chinese README. ([4e24f36](https://github.com/CarlLee1983/ecpay-payment-node/commit/4e24f36c785e9221d3af563244792f444f5db968))
+
 ## 1.0.0 (2025-12-08)
 
 
