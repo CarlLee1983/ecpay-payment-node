@@ -1,0 +1,145 @@
+$ eslint .
+
+/Users/carl/Dev/Carl/ecpay-payment-node/dist/cjs/index.js
+  0:0  error  Parsing error: "parserOptions.project" has been provided for @typescript-eslint/parser.
+The file was not found in any of the provided project(s): dist/cjs/index.js
+
+/Users/carl/Dev/Carl/ecpay-payment-node/dist/esm/index.js
+  0:0  error  Parsing error: "parserOptions.project" has been provided for @typescript-eslint/parser.
+The file was not found in any of the provided project(s): dist/esm/index.js
+
+/Users/carl/Dev/Carl/ecpay-payment-node/dist/types/EcPayClient.d.ts
+  0:0  error  Parsing error: "parserOptions.project" has been provided for @typescript-eslint/parser.
+The file was not found in any of the provided project(s): dist/types/EcPayClient.d.ts
+
+/Users/carl/Dev/Carl/ecpay-payment-node/dist/types/FormBuilder.d.ts
+  0:0  error  Parsing error: "parserOptions.project" has been provided for @typescript-eslint/parser.
+The file was not found in any of the provided project(s): dist/types/FormBuilder.d.ts
+
+/Users/carl/Dev/Carl/ecpay-payment-node/dist/types/base/Content.d.ts
+  0:0  error  Parsing error: "parserOptions.project" has been provided for @typescript-eslint/parser.
+The file was not found in any of the provided project(s): dist/types/base/Content.d.ts
+
+/Users/carl/Dev/Carl/ecpay-payment-node/dist/types/enums/ActionType.d.ts
+  0:0  error  Parsing error: "parserOptions.project" has been provided for @typescript-eslint/parser.
+The file was not found in any of the provided project(s): dist/types/enums/ActionType.d.ts
+
+/Users/carl/Dev/Carl/ecpay-payment-node/dist/types/enums/ChoosePayment.d.ts
+  0:0  error  Parsing error: "parserOptions.project" has been provided for @typescript-eslint/parser.
+The file was not found in any of the provided project(s): dist/types/enums/ChoosePayment.d.ts
+
+/Users/carl/Dev/Carl/ecpay-payment-node/dist/types/enums/EncryptType.d.ts
+  0:0  error  Parsing error: "parserOptions.project" has been provided for @typescript-eslint/parser.
+The file was not found in any of the provided project(s): dist/types/enums/EncryptType.d.ts
+
+/Users/carl/Dev/Carl/ecpay-payment-node/dist/types/enums/InvoiceMark.d.ts
+  0:0  error  Parsing error: "parserOptions.project" has been provided for @typescript-eslint/parser.
+The file was not found in any of the provided project(s): dist/types/enums/InvoiceMark.d.ts
+
+/Users/carl/Dev/Carl/ecpay-payment-node/dist/types/enums/MediaFormat.d.ts
+  0:0  error  Parsing error: "parserOptions.project" has been provided for @typescript-eslint/parser.
+The file was not found in any of the provided project(s): dist/types/enums/MediaFormat.d.ts
+
+/Users/carl/Dev/Carl/ecpay-payment-node/dist/types/enums/PaymentMethod.d.ts
+  0:0  error  Parsing error: "parserOptions.project" has been provided for @typescript-eslint/parser.
+The file was not found in any of the provided project(s): dist/types/enums/PaymentMethod.d.ts
+
+/Users/carl/Dev/Carl/ecpay-payment-node/dist/types/enums/PeriodType.d.ts
+  0:0  error  Parsing error: "parserOptions.project" has been provided for @typescript-eslint/parser.
+The file was not found in any of the provided project(s): dist/types/enums/PeriodType.d.ts
+
+/Users/carl/Dev/Carl/ecpay-payment-node/dist/types/errors/PaymentError.d.ts
+  0:0  error  Parsing error: "parserOptions.project" has been provided for @typescript-eslint/parser.
+The file was not found in any of the provided project(s): dist/types/errors/PaymentError.d.ts
+
+/Users/carl/Dev/Carl/ecpay-payment-node/dist/types/index.d.ts
+  0:0  error  Parsing error: "parserOptions.project" has been provided for @typescript-eslint/parser.
+The file was not found in any of the provided project(s): dist/types/index.d.ts
+
+/Users/carl/Dev/Carl/ecpay-payment-node/dist/types/interfaces/INotifyHandler.d.ts
+  0:0  error  Parsing error: "parserOptions.project" has been provided for @typescript-eslint/parser.
+The file was not found in any of the provided project(s): dist/types/interfaces/INotifyHandler.d.ts
+
+/Users/carl/Dev/Carl/ecpay-payment-node/dist/types/interfaces/IPaymentCommand.d.ts
+  0:0  error  Parsing error: "parserOptions.project" has been provided for @typescript-eslint/parser.
+The file was not found in any of the provided project(s): dist/types/interfaces/IPaymentCommand.d.ts
+
+/Users/carl/Dev/Carl/ecpay-payment-node/dist/types/notifications/AtmNotify.d.ts
+  0:0  error  Parsing error: "parserOptions.project" has been provided for @typescript-eslint/parser.
+The file was not found in any of the provided project(s): dist/types/notifications/AtmNotify.d.ts
+
+/Users/carl/Dev/Carl/ecpay-payment-node/dist/types/notifications/PaymentNotify.d.ts
+  0:0  error  Parsing error: "parserOptions.project" has been provided for @typescript-eslint/parser.
+The file was not found in any of the provided project(s): dist/types/notifications/PaymentNotify.d.ts
+
+/Users/carl/Dev/Carl/ecpay-payment-node/dist/types/operations/AllInOne.d.ts
+  0:0  error  Parsing error: "parserOptions.project" has been provided for @typescript-eslint/parser.
+The file was not found in any of the provided project(s): dist/types/operations/AllInOne.d.ts
+
+/Users/carl/Dev/Carl/ecpay-payment-node/dist/types/operations/AtmPayment.d.ts
+  0:0  error  Parsing error: "parserOptions.project" has been provided for @typescript-eslint/parser.
+The file was not found in any of the provided project(s): dist/types/operations/AtmPayment.d.ts
+
+/Users/carl/Dev/Carl/ecpay-payment-node/dist/types/operations/CreditPayment.d.ts
+  0:0  error  Parsing error: "parserOptions.project" has been provided for @typescript-eslint/parser.
+The file was not found in any of the provided project(s): dist/types/operations/CreditPayment.d.ts
+
+/Users/carl/Dev/Carl/ecpay-payment-node/dist/types/operations/CvsPayment.d.ts
+  0:0  error  Parsing error: "parserOptions.project" has been provided for @typescript-eslint/parser.
+The file was not found in any of the provided project(s): dist/types/operations/CvsPayment.d.ts
+
+/Users/carl/Dev/Carl/ecpay-payment-node/dist/types/queries/QueryOrder.d.ts
+  0:0  error  Parsing error: "parserOptions.project" has been provided for @typescript-eslint/parser.
+The file was not found in any of the provided project(s): dist/types/queries/QueryOrder.d.ts
+
+/Users/carl/Dev/Carl/ecpay-payment-node/dist/types/security/CheckMacEncoder.d.ts
+  0:0  error  Parsing error: "parserOptions.project" has been provided for @typescript-eslint/parser.
+The file was not found in any of the provided project(s): dist/types/security/CheckMacEncoder.d.ts
+
+/Users/carl/Dev/Carl/ecpay-payment-node/eslint.config.mjs
+  0:0  error  Parsing error: "parserOptions.project" has been provided for @typescript-eslint/parser.
+The file was not found in any of the provided project(s): eslint.config.mjs
+
+/Users/carl/Dev/Carl/ecpay-payment-node/src/EcPayClient.ts
+  24:66  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  57:44  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/carl/Dev/Carl/ecpay-payment-node/src/base/Content.ts
+    1:10  warning  'ActionType' is defined but never used    @typescript-eslint/no-unused-vars
+   20:39  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  180:41  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  189:41  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/carl/Dev/Carl/ecpay-payment-node/src/interfaces/INotifyHandler.ts
+  2:33  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  3:31  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/carl/Dev/Carl/ecpay-payment-node/src/interfaces/IPaymentCommand.ts
+  10:34  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/carl/Dev/Carl/ecpay-payment-node/src/notifications/PaymentNotify.ts
+   8:34  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  15:40  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  21:46  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  28:38  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/carl/Dev/Carl/ecpay-payment-node/src/operations/CreditPayment.ts
+  3:10  warning  'PaymentError' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/carl/Dev/Carl/ecpay-payment-node/src/queries/QueryOrder.ts
+  30:27  warning  'amount' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  31:25  warning  'desc' is defined but never used. Allowed unused args must match /^_/u    @typescript-eslint/no-unused-vars
+  32:24  warning  'name' is defined but never used. Allowed unused args must match /^_/u    @typescript-eslint/no-unused-vars
+  33:25  warning  'url' is defined but never used. Allowed unused args must match /^_/u     @typescript-eslint/no-unused-vars
+
+/Users/carl/Dev/Carl/ecpay-payment-node/src/security/CheckMacEncoder.ts
+  26:43  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  26:65  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  37:49  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  54:47  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  54:69  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  64:48  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+✖ 49 problems (25 errors, 24 warnings)
+
+error: script "lint" exited with code 1

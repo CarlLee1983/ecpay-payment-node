@@ -1,0 +1,67 @@
+{
+  "name": "ecpay-payment-node",
+  "version": "1.0.0",
+  "description": "ECPay Payment Gateway SDK for Node.js (Bun-compatible)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CarlLee1983/ecpay-payment-node.git"
+  },
+  "type": "module",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18",
+    "bun": ">=1.0"
+  },
+  "scripts": {
+    "build": "bun run build:esm && bun run build:cjs && bun run build:types",
+    "build:esm": "bun build ./src/index.ts --outdir ./dist/esm --target node --format esm",
+    "build:cjs": "bun build ./src/index.ts --outdir ./dist/cjs --target node --format cjs",
+    "build:types": "tsc --emitDeclarationOnly --outDir ./dist/types",
+    "test": "bun test test/",
+    "test:coverage": "bun test test/ --coverage",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "prepublishOnly": "bun run build"
+  },
+  "keywords": [
+    "ecpay",
+    "payment",
+    "node",
+    "bun",
+    "typescript",
+    "sdk"
+  ],
+  "author": "Carl",
+  "license": "MIT",
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@typescript-eslint/eslint-plugin": "^8.48.1",
+    "@typescript-eslint/parser": "^8.48.1",
+    "c8": "^10.1.3",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^16.5.0",
+    "prettier": "^3.7.4",
+    "typescript-eslint": "^8.48.1"
+  }
+}
