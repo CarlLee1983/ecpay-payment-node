@@ -2,6 +2,11 @@ import { Content } from '../base/Content'
 import { ChoosePayment } from '../enums/ChoosePayment'
 import { PaymentError } from '../errors/PaymentError'
 
+/**
+ * Query Order
+ *
+ * Query the status of a specific order by MerchantTradeNo.
+ */
 export class QueryOrder extends Content {
     protected requestPath = '/Cashier/QueryTradeInfo/V5'
     protected choosePayment = ChoosePayment.ALL

@@ -1,6 +1,11 @@
 import { Content } from '../base/Content'
 import { ChoosePayment } from '../enums/ChoosePayment'
 
+/**
+ * ATM Payment
+ *
+ * Generates a virtual account number for ATM transfer.
+ */
 export class AtmPayment extends Content {
     protected choosePayment = ChoosePayment.ATM
 
@@ -10,8 +15,9 @@ export class AtmPayment extends Content {
     }
 
     /**
-     * 設定允許繳費有效天數
-     * @param days 1~60
+     * Set payment expiration days.
+     *
+     * @param days - Valid days (1~60)
      */
     public setExpireDate(days: number): this {
         this.content.ExpireDate = days
@@ -19,8 +25,9 @@ export class AtmPayment extends Content {
     }
 
     /**
-     * 設定伺服器端回傳付款相關資訊
-     * @param url 網址
+     * Set the server-side URL to receive payment info.
+     *
+     * @param url - The callback URL
      */
     public setPaymentInfoURL(url: string): this {
         this.content.PaymentInfoURL = url
@@ -28,8 +35,9 @@ export class AtmPayment extends Content {
     }
 
     /**
-     * 設定 Client 端回傳付款相關資訊
-     * @param url 網址
+     * Set the client-side redirect URL after obtaining payment info.
+     *
+     * @param url - The redirect URL
      */
     public setClientRedirectURL(url: string): this {
         this.content.ClientRedirectURL = url

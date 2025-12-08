@@ -2,17 +2,12 @@ import { Content } from '../base/Content'
 import { ChoosePayment } from '../enums/ChoosePayment'
 import { PaymentError } from '../errors/PaymentError'
 
+/**
+ * Query Credit Card Detail
+ *
+ * Query details of a specific credit card transaction.
+ */
 export class QueryCreditDetail extends Content {
-    // Usually this points to /Cashier/QueryCreditCardPeriodInfo or a specific endpoint
-    // Based on standard ECPay API, it could be /CreditDetail/QueryTrade/V2 or similar.
-    // Assuming standard path for now, or I'll refer to PHP SDK if available.
-    // PHP SDK: Queries/QueryCreditCardPeriodInfo.php -> /Cashier/QueryCreditCardPeriodInfo
-    // But "QueryCreditDetail" sounds like single trade.
-    // Let's check PHP SDK file names/paths if possible.
-    // Since I can't browse freely, I'll stick to a common assumption or check PHP structure quickly if allowed.
-    // Plan says "QueryCreditDetail.ts" and "QueryRecurringOrder.ts".
-    // Let's assume QueryCreditDetail is for general credit trade query and QueryRecurringOrder is for period info.
-
     protected requestPath = '/CreditDetail/QueryTrade/V2'
     protected choosePayment = ChoosePayment.ALL
 
@@ -21,16 +16,25 @@ export class QueryCreditDetail extends Content {
         // Specific params initialization if needed
     }
 
+    /**
+     * Set Credit Card Refund ID (gwsr).
+     */
     public setCreditRefundId(id: string): this {
         this.content.CreditRefundId = id
         return this
     }
 
+    /**
+     * Set credit amount.
+     */
     public setCreditAmount(amount: number): this {
         this.content.CreditAmount = amount
         return this
     }
 
+    /**
+     * Set Credit Check Code.
+     */
     public setCreditCheckCode(code: string): this {
         this.content.CreditCheckCode = code
         return this

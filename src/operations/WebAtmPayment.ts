@@ -1,6 +1,11 @@
 import { Content } from '../base/Content'
 import { ChoosePayment } from '../enums/ChoosePayment'
 
+/**
+ * WebATM Payment
+ *
+ * Handles WebATM transactions.
+ */
 export class WebAtmPayment extends Content {
     protected choosePayment = ChoosePayment.WebATM
 

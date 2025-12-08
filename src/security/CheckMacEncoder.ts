@@ -2,6 +2,12 @@ import { createHash } from 'node:crypto'
 import { EncryptType } from '../enums/EncryptType'
 import { PaymentError } from '../errors/PaymentError'
 
+/**
+ * CheckMacEncoder
+ *
+ * Responsible for generating and verifying the CheckMacValue (checksum)
+ * for ECPay Security.
+ */
 export class CheckMacEncoder {
     private readonly hashKey: string
     private readonly hashIV: string
@@ -14,14 +20,21 @@ export class CheckMacEncoder {
     }
 
     /**
-     * 建立編碼器實例
+     * Create an encoder instance.
+     *
+     * @param hashKey - Merchant HashKey
+     * @param hashIV - Merchant HashIV
+     * @param encryptType - Encryption type (1: SHA256, 0: MD5)
      */
     static create(hashKey: string, hashIV: string, encryptType: number = 1): CheckMacEncoder {
         return new CheckMacEncoder(hashKey, hashIV, encryptType)
     }
 
     /**
-     * 為 Payload 加上 CheckMacValue
+     * Encode the payload by adding CheckMacValue.
+     *
+     * @param payload - The data to encode
+     * @returns New object with CheckMacValue appended
      */
     encodePayload(payload: Record<string, any>): Record<string, any> {
         const data = { ...payload }
@@ -32,7 +45,10 @@ export class CheckMacEncoder {
     }
 
     /**
-     * 驗證回傳資料的 CheckMacValue
+     * Verify the response data's CheckMacValue.
+     *
+     * @param responseData - The data received from ECPay
+     * @returns true if valid, false otherwise
      */
     verifyResponse(responseData: Record<string, any>): boolean {
         if (!responseData.CheckMacValue) {
@@ -49,7 +65,11 @@ export class CheckMacEncoder {
     }
 
     /**
-     * 驗證並拋出例外
+     * Verify and throw error if invalid.
+     *
+     * @param responseData - The data received from ECPay
+     * @returns The original data if valid
+     * @throws {PaymentError} If CheckMacValue verification fails
      */
     verifyOrFail(responseData: Record<string, any>): Record<string, any> {
         if (!this.verifyResponse(responseData)) {
@@ -59,7 +79,16 @@ export class CheckMacEncoder {
     }
 
     /**
-     * 產生 CheckMacValue
+     * Generate CheckMacValue from data.
+     *
+     * Algorithm:
+     * 1. Sort keys alphabetically (A-Z)
+     * 2. Join as query string (key=value&...)
+     * 3. Prepend HashKey, Append HashIV
+     * 4. URL Encode
+     * 5. Convert to lowercase
+     * 6. Replace specific characters to match .NET encoding
+     * 7. Hash (SHA256 or MD5) -> Upper case
      */
     generateCheckMacValue(data: Record<string, any>): string {
         // 1. 依照參數名稱字母排序 (A-Z)
@@ -76,7 +105,7 @@ export class CheckMacEncoder {
         let encoded = encodeURIComponent(raw).toLowerCase()
 
         // 5. 處理 .NET 相容的 URL encode 差異 & PHP urlencode compatibility
-        // Node.js encodeURIComponent is stricter than PHP urlencode in some cases (e.g. ~), 
+        // Node.js encodeURIComponent is stricter than PHP urlencode in some cases (e.g. ~),
         // but the key point here is to match ECPay's specific replacement rules.
         // PHP's urlencode encodes spaces as +, encodeURIComponent encodes them as %20.
         // ECPay expects:

@@ -1,6 +1,11 @@
 import { Content } from '../base/Content'
 import { ChoosePayment } from '../enums/ChoosePayment'
 
+/**
+ * WeChat Pay
+ *
+ * Handles WeChat Pay transactions.
+ */
 export class WechatPayment extends Content {
     protected choosePayment = ChoosePayment.WechatPay
 

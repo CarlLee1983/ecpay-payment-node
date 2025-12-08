@@ -1,6 +1,11 @@
 import { Content } from '../base/Content'
 import { ChoosePayment } from '../enums/ChoosePayment'
 
+/**
+ * AllInOne Payment
+ *
+ * Allows the user to select from multiple payment methods on ECPay's page.
+ */
 export class AllInOne extends Content {
     protected choosePayment = ChoosePayment.ALL
 
@@ -10,8 +15,9 @@ export class AllInOne extends Content {
     }
 
     /**
-     * 設定忽略的付款方式
-     * @param payment 付款方式
+     * Disable specific payment methods.
+     *
+     * @param payment - Multiple payments separated by '#' (e.g., 'Credit#ATM')
      */
     public setIgnorePayment(payment: string): this {
         this.content.IgnorePayment = payment

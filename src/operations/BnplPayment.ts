@@ -1,6 +1,11 @@
 import { Content } from '../base/Content'
 import { ChoosePayment } from '../enums/ChoosePayment'
 
+/**
+ * BNPL Payment (Buy Now Pay Later)
+ *
+ * Handles BNPL transactions.
+ */
 export class BnplPayment extends Content {
     protected choosePayment = ChoosePayment.Bnpl
 

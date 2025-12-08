@@ -2,6 +2,11 @@ import { Content } from '../base/Content'
 import { ChoosePayment } from '../enums/ChoosePayment'
 
 
+/**
+ * Credit Card Payment
+ *
+ * Handles standard credit card transactions.
+ */
 export class CreditPayment extends Content {
     protected choosePayment = ChoosePayment.Credit
 
@@ -11,8 +16,9 @@ export class CreditPayment extends Content {
     }
 
     /**
-     * 設定是否啟用紅利折抵
-     * @param enable 是否啟用
+     * Enable or disable bonus points redemption.
+     *
+     * @param enable - True to enable redemption
      */
     public setRedeem(enable: boolean): this {
         this.content.Redeem = enable ? 'Y' : 'N'
@@ -20,8 +26,9 @@ export class CreditPayment extends Content {
     }
 
     /**
-     * 設定是否使用銀聯卡
-     * @param unionPay 0=不使用, 1=使用, 2=優先使用
+     * Set UnionPay usage.
+     *
+     * @param unionPay - 0: No, 1: Yes, 2: Priority
      */
     public setUnionPay(unionPay: 0 | 1 | 2): this {
         this.content.UnionPay = unionPay
@@ -29,8 +36,9 @@ export class CreditPayment extends Content {
     }
 
     /**
-     * 設定信用卡記憶卡號識別碼
-     * @param memberId 會員識別碼
+     * Set merchant member ID (for memory card features).
+     *
+     * @param memberId - The member identifier
      */
     public setMerchantMemberID(memberId: string): this {
         this.content.MerchantMemberID = memberId
@@ -38,8 +46,9 @@ export class CreditPayment extends Content {
     }
 
     /**
-     * 設定是否使用記憶卡號
-     * @param bindingCard 0=不使用, 1=使用
+     * Set binding card (memory card) usage.
+     *
+     * @param bindingCard - 0: No, 1: Yes
      */
     public setBindingCard(bindingCard: 0 | 1): this {
         this.content.BindingCard = bindingCard
@@ -47,8 +56,9 @@ export class CreditPayment extends Content {
     }
 
     /**
-     * 設定語系
-     * @param language ENG 或空字串（預設中文）
+     * Set language for the payment page.
+     *
+     * @param language - 'ENG' or empty for default (Chinese)
      */
     public setLanguage(language: 'ENG' | ''): this {
         this.content.Language = language

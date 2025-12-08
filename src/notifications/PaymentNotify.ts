@@ -3,6 +3,11 @@ import { PaymentError } from '../errors/PaymentError'
 import { INotifyHandler } from '../interfaces/INotifyHandler'
 import { CheckMacEncoder } from '../security/CheckMacEncoder'
 
+/**
+ * Payment Notify Handler
+ *
+ * Verifies ECPay notification callbacks and extracts data.
+ */
 export class PaymentNotify implements INotifyHandler {
     private encoder: CheckMacEncoder
     private data: Record<string, any> = {}
@@ -12,12 +17,23 @@ export class PaymentNotify implements INotifyHandler {
         this.encoder = new CheckMacEncoder(hashKey, hashIV, encryptType)
     }
 
+    /**
+     * Verify the received parameters.
+     *
+     * @param data - The request body (POST params)
+     * @returns True if CheckMacValue is valid
+     */
     public verify(data: Record<string, any>): boolean {
         this.data = data
         this.verified = this.encoder.verifyResponse(data)
         return this.verified
     }
 
+    /**
+     * Verify and throw if failed.
+     *
+     * @throws {PaymentError} If invalid
+     */
     public verifyOrFail(data: Record<string, any>): this {
         if (!this.verify(data)) {
             throw PaymentError.checkMacValueFailed()
@@ -25,10 +41,16 @@ export class PaymentNotify implements INotifyHandler {
         return this
     }
 
+    /**
+     * Get raw data.
+     */
     public getData(): Record<string, any> {
         return this.data
     }
 
+    /**
+     * Check if payment was successful (RtnCode === '1').
+     */
     public isSuccess(): boolean {
         return this.getRtnCode() === '1'
     }
@@ -77,6 +99,10 @@ export class PaymentNotify implements INotifyHandler {
         return this.verified
     }
 
+    /**
+     * Get success response string to reply to ECPay.
+     * @returns '1|OK'
+     */
     public getSuccessResponse(): string {
         return '1|OK'
     }

@@ -2,6 +2,11 @@ import { Content } from '../base/Content'
 import { ChoosePayment } from '../enums/ChoosePayment'
 import { PaymentError } from '../errors/PaymentError'
 
+/**
+ * Query Recurring Order
+ *
+ * Query the status of a recurring credit card order.
+ */
 export class QueryRecurringOrder extends Content {
     protected requestPath = '/Cashier/QueryCreditCardPeriodInfo'
     protected choosePayment = ChoosePayment.ALL

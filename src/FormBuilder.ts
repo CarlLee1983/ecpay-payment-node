@@ -1,5 +1,11 @@
 import { Content } from './base/Content'
 
+/**
+ * FormBuilder
+ *
+ * A helper class to generate HTML forms or JSON data for ECPay Payment.
+ * Useful for frontend integrations.
+ */
 export class FormBuilder {
     private serverUrl: string
 
@@ -7,6 +13,14 @@ export class FormBuilder {
         this.serverUrl = serverUrl.replace(/\/$/, '')
     }
 
+    /**
+     * Generate a standard HTML Form string.
+     *
+     * @param payment - The payment object containing parameters
+     * @param formId - The ID for the form element
+     * @param submitText - The text for the submit button
+     * @returns An HTML string of the form
+     */
     public build(payment: Content, formId: string = 'ecpay-form', submitText: string = '前往付款'): string {
         const actionUrl = this.getActionUrl(payment)
         const fields = payment.getContent()
@@ -21,6 +35,15 @@ export class FormBuilder {
         return html
     }
 
+    /**
+     * Generate an HTML Form that automatically submits itself.
+     * Useful for redirecting the user immediately.
+     *
+     * @param payment - The payment object
+     * @param formId - The ID for the form element
+     * @param loadingText - The text displayed while redirecting
+     * @returns A full HTML page string with auto-submit script
+     */
     public autoSubmit(payment: Content, formId: string = 'ecpay-form', loadingText: string = '正在導向綠界付款頁面，請稍候...'): string {
         const actionUrl = this.getActionUrl(payment)
         const fields = payment.getContent()
@@ -59,10 +82,17 @@ export class FormBuilder {
         return html
     }
 
+    /**
+     * Get the full action URL for the payment request.
+     */
     public getActionUrl(payment: Content): string {
         return `${this.serverUrl}${payment.getRequestPath()}`
     }
 
+    /**
+     * Generate a JSON object containing the action URL and fields.
+     * Useful for API responses where the frontend builds the form.
+     */
     public toJson(payment: Content): string {
         return JSON.stringify({
             action: this.getActionUrl(payment),

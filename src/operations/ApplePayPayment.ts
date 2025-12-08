@@ -1,6 +1,11 @@
 import { Content } from '../base/Content'
 import { ChoosePayment } from '../enums/ChoosePayment'
 
+/**
+ * Apple Pay Payment
+ *
+ * Handles Apple Pay transactions.
+ */
 export class ApplePayPayment extends Content {
     protected choosePayment = ChoosePayment.ApplePay
 
