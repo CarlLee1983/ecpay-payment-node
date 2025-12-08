@@ -2,16 +2,16 @@
 
 [English](README.md) | [繁體中文](README_TW.md)
 
-Unofficial ECPay Payment SDK for Node.js, built with Bun, supporting both ESM and CJS.
+綠界金流 SDK Node.js 版本 (非官方)，基於 Bun 開發，支援 ESM 與 CJS。
 
-## Features
+## 特色
 
-- 🚀 Full TypeScript support
-- 📦 Supports both ESM and CommonJS
-- 🔒 Built-in CheckMacValue calculation and verification
-- 🛠 Provides FormBuilder for quick payment form generation
+- 🚀 完整支援 TypeScript
+- 📦 同時支援 ESM 與 CommonJS
+- 🔒 內建 CheckMacValue 計算與驗證
+- 🛠 提供 FormBuilder 快速產生付款表單
 
-## Installation
+## 安裝
 
 ```bash
 npm install ecpay-payment-node
@@ -23,34 +23,34 @@ pnpm add ecpay-payment-node
 bun add ecpay-payment-node
 ```
 
-## Usage
+## 使用範例
 
-### 1. Credit Card Payment (One-Time)
+### 1. 信用卡付款 (一般/一次付清)
 
 ```typescript
 import { CreditPayment, FormBuilder } from 'ecpay-payment-node'
 
-// 1. Initialize
+// 1. 初始化
 const payment = new CreditPayment('2000132', '5294y06JbISpM5x9', 'v77hoKGq4kWxNNIS')
 
-// 2. Set Parameters
+// 2. 設定參數
 payment
   .setMerchantTradeNo('Credit' + Date.now())
   .setMerchantTradeDate(new Date())
   .setTotalAmount(1000)
-  .setTradeDesc('Test Transaction')
-  .setItemName('Item A x 1')
+  .setTradeDesc('信用卡測試交易')
+  .setItemName('測試商品 A x 1')
   .setReturnURL('https://example.com/return')
-  // Optional
+  // 選擇性參數
   .setClientBackURL('https://example.com/client-back')
   .setNeedExtraPaidInfo('Y')
 
-// 3. Generate HTML Form
+// 3. 產生表單 (HTML)
 const builder = new FormBuilder()
 const html = builder.build(payment)
 ```
 
-### 2. Credit Card Installment
+### 2. 信用卡分期付款
 
 ```typescript
 import { CreditInstallment, FormBuilder } from 'ecpay-payment-node'
@@ -58,49 +58,49 @@ import { CreditInstallment, FormBuilder } from 'ecpay-payment-node'
 const payment = new CreditInstallment('2000132', '5294y06JbISpM5x9', 'v77hoKGq4kWxNNIS')
 payment.setMerchantTradeNo('Inst' + Date.now())
        .setTotalAmount(3000)
-       .setTradeDesc('Installment Test')
-       .setItemName('Expensive Item x 1')
+       .setTradeDesc('分期付款測試')
+       .setItemName('昂貴商品 x 1')
        .setReturnURL('https://example.com/return')
-       // Set Installment Period (3, 6, 12, 18, 24)
+       // 設定分期期數 (3, 6, 12, 18, 24)
        .setCreditInstallment('3')
 
 const html = new FormBuilder().build(payment)
 ```
 
-### 3. Credit Card Recurring (Subscription)
+### 3. 信用卡定期定額 (Credit Recurring)
 
-> 💡 **Use Case**: Subscription services, regular donations, membership fees.
+> 💡 **適用場景**：訂閱制服務、定期捐款、會費扣繳。
 
 ```typescript
 import { CreditRecurring, FormBuilder, PeriodType } from 'ecpay-payment-node'
 
 const payment = new CreditRecurring('2000132', '5294y06JbISpM5x9', 'v77hoKGq4kWxNNIS')
 payment.setMerchantTradeNo('Rec' + Date.now())
-       .setTotalAmount(99) // First authorization amount (usually same as period amount)
-       .setTradeDesc('Subscription Service')
-       .setItemName('Monthly Membership')
-       .setReturnURL('https://example.com/return') // Callbak for initial authorization
-       // Recurring Parameters (Required)
-       .setPeriodAmount(99)        // Amount per charge
-       .setPeriodType(PeriodType.Month) // Cycle unit (Year, Month, Day)
-       .setFrequency(1)            // Frequency (Every 1 Month)
-       .setExecTimes(12)           // Total executions (12 times)
-       .setPeriodReturnURL('https://example.com/period-return') // Callback for each recurring charge
+       .setTotalAmount(99) // 第一次授權金額 (通常等於每期金額)
+       .setTradeDesc('訂閱服務')
+       .setItemName('月費會員')
+       .setReturnURL('https://example.com/return') // 首次授權結果回傳網址
+       // 定期定額專用參數 (必須設定)
+       .setPeriodAmount(99)        // 每次扣款金額
+       .setPeriodType(PeriodType.Month) // 週期類別 (Year, Month, Day)
+       .setFrequency(1)            // 執行頻率 (每 1 個月)
+       .setExecTimes(12)           // 執行次數 (共 12 次)
+       .setPeriodReturnURL('https://example.com/period-return') // 每次定期扣款結果的回傳網址
 
 const html = new FormBuilder().build(payment)
 ```
 
-**Parameter Details:**
+**參數詳細說明：**
 
-| Method | Description | Example |
+| 參數方法 | 說明 | 範例 |
 | :--- | :--- | :--- |
-| `setPeriodAmount` | **Period Amount**<br>The amount to be charged for each period. | `99` |
-| `setPeriodType` | **Cycle Unit**<br>Unit of the recurring cycle.<br>- `PeriodType.Day`<br>- `PeriodType.Month`<br>- `PeriodType.Year` | `PeriodType.Month` |
-| `setFrequency` | **Frequency**<br>Interval of the cycle.<br>e.g., if Type is Month and Frequency is 1, it means "Every 1 Month". | `1` |
-| `setExecTimes` | **Execution Times**<br>Total number of times to charge.<br>e.g., `12` means charge 12 times in total. | `12` |
-| `setPeriodReturnURL`| **Recurring Callback URL**<br>Server URL notified by ECPay after each successful recurring charge. | `https://...` |
+| `setPeriodAmount` | **每期扣款金額**<br>每次定期執行時實際扣款的金額。 | `99` |
+| `setPeriodType` | **週期類別**<br>定義週期的單位。<br>- `PeriodType.Day` (天)<br>- `PeriodType.Month` (月)<br>- `PeriodType.Year` (年) | `PeriodType.Month` |
+| `setFrequency` | **執行頻率**<br>搭配週期類別使用。<br>例如類別為月，頻率為 1，代表「每 1 個月」扣款一次。<br>若頻率為 2，代表「每 2 個月」扣款一次。 | `1` |
+| `setExecTimes` | **執行總次數**<br>總共要執行扣款的次數。<br>例如 `12` 代表總共扣款 12 次 (含首次)。 | `12` |
+| `setPeriodReturnURL`| **定期扣款回傳網址**<br>每次定期扣款成功後，綠界 Server 會呼叫此網址通知結果。 | `https://...` |
 
-### 4. ATM (Virtual Account)
+### 4. ATM 虛擬帳號
 
 ```typescript
 import { AtmPayment, FormBuilder } from 'ecpay-payment-node'
@@ -108,17 +108,17 @@ import { AtmPayment, FormBuilder } from 'ecpay-payment-node'
 const payment = new AtmPayment('2000132', '5294y06JbISpM5x9', 'v77hoKGq4kWxNNIS')
 payment.setMerchantTradeNo('ATM' + Date.now())
        .setTotalAmount(500)
-       .setTradeDesc('ATM Test')
-       .setItemName('Transfer Item')
+       .setTradeDesc('ATM 轉帳測試')
+       .setItemName('轉帳商品')
        .setReturnURL('https://example.com/return')
-       // ATM Specifics
-       .setExpireDate(3) // Expires in 3 days
-       .setPaymentInfoURL('https://example.com/payment-info') // Server webhook
+       // ATM 專用參數
+       .setExpireDate(3) // 3天後過期
+       .setPaymentInfoURL('https://example.com/payment-info') // Server 端接收轉帳資訊
 
 const html = new FormBuilder().build(payment)
 ```
 
-### 5. CVS (Convenience Store Code)
+### 5. 超商代碼 (CVS)
 
 ```typescript
 import { CvsPayment, FormBuilder } from 'ecpay-payment-node'
@@ -126,11 +126,11 @@ import { CvsPayment, FormBuilder } from 'ecpay-payment-node'
 const payment = new CvsPayment('2000132', '5294y06JbISpM5x9', 'v77hoKGq4kWxNNIS')
 payment.setMerchantTradeNo('CVS' + Date.now())
        .setTotalAmount(200)
-       .setTradeDesc('CVS Test')
-       .setItemName('CVS Item')
+       .setTradeDesc('超商繳費測試')
+       .setItemName('超商商品')
        .setReturnURL('https://example.com/return')
-       // CVS Specifics
-       .setStoreExpireDate(10080) // Minutes (7 days)
+       // CVS 專用參數
+       .setStoreExpireDate(10080) // 分鐘 (7天)
        .setPaymentInfoURL('https://example.com/payment-info')
 
 const html = new FormBuilder().build(payment)
@@ -152,21 +152,21 @@ const builder = new FormBuilder()
 const html = builder.build(payment)
 ```
 
-### Verify Notification
+### 驗證通知
 
 ```typescript
 import { PaymentNotify } from 'ecpay-payment-node'
 
 const notify = new PaymentNotify(hashKey, hashIV)
-const data = { /* Parameters returned by ECPay */ }
+const data = { /* 綠界回傳的參數 */ }
 
 if (notify.verify(data)) {
-  console.log('Verification Successful')
-  // Process order...
+  console.log('驗證成功')
+  // 處理訂單...
 }
 ```
 
-### Order Query
+### 訂單查詢
 
 ```typescript
 import { QueryOrder, EcPayClient } from 'ecpay-payment-node'
@@ -179,16 +179,16 @@ const result = await client.query(query)
 console.log(result)
 ```
 
-## Development
+## 開發
 
 ```bash
-# Install dependencies
+# 安裝依賴
 bun install
 
-# Run tests
+# 執行測試
 bun test
 
-# Build
+# 建置
 bun run build
 ```
 
