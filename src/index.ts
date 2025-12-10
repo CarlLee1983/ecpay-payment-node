@@ -1,5 +1,7 @@
 /**
  * ECPay Payment SDK for Node.js
+ *
+ * @packageDocumentation
  */
 export const VERSION = '1.0.0'
 
@@ -52,3 +54,6 @@ export * from './queries/DownloadMerchantBalance'
 // Helpers
 export * from './EcPayClient'
 export * from './FormBuilder'
+
+// Utils
+export * from './utils/dateUtils'

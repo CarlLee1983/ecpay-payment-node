@@ -1,10 +1,28 @@
 import { Content } from '../base/Content'
 import { ChoosePayment } from '../enums/ChoosePayment'
+import { PaymentError } from '../errors/PaymentError'
+
+/**
+ * 條碼繳費期限限制（天）
+ */
+export const BARCODE_EXPIRE_DATE_MIN = 1
+export const BARCODE_EXPIRE_DATE_MAX = 7
 
 /**
  * Barcode Payment
  *
  * Generates a barcode for convenience store payment.
+ *
+ * @example
+ * ```typescript
+ * const payment = new BarcodePayment(merchantId, hashKey, hashIV)
+ *   .setMerchantTradeNo('ORDER123')
+ *   .setTotalAmount(500)
+ *   .setTradeDesc('條碼付款測試')
+ *   .setItemName('商品')
+ *   .setReturnURL('https://example.com/callback')
+ *   .setStoreExpireDate(3) // 3 天內繳費
+ * ```
  */
 export class BarcodePayment extends Content {
     protected choosePayment = ChoosePayment.Barcode
@@ -18,8 +36,15 @@ export class BarcodePayment extends Content {
      * Set payment expiration days.
      *
      * @param days - Valid days (1~7)
+     * @throws {PaymentError} If days is not between 1 and 7
      */
     public setStoreExpireDate(days: number): this {
+        if (days < BARCODE_EXPIRE_DATE_MIN || days > BARCODE_EXPIRE_DATE_MAX) {
+            throw PaymentError.invalid(
+                'StoreExpireDate',
+                `Days must be between ${String(BARCODE_EXPIRE_DATE_MIN)} and ${String(BARCODE_EXPIRE_DATE_MAX)}`
+            )
+        }
         this.content.StoreExpireDate = days
         return this
     }

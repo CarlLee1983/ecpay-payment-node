@@ -14,6 +14,21 @@ export class FormBuilder {
     }
 
     /**
+     * 將字串進行 HTML 轉義，防止 XSS 攻擊
+     *
+     * @param str - 要轉義的字串
+     * @returns 轉義後的安全字串
+     */
+    private escapeHtml(str: string): string {
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;')
+    }
+
+    /**
      * Generate a standard HTML Form string.
      *
      * @param payment - The payment object containing parameters
@@ -22,14 +37,18 @@ export class FormBuilder {
      * @returns An HTML string of the form
      */
     public build(payment: Content, formId: string = 'ecpay-form', submitText: string = '前往付款'): string {
-        const actionUrl = this.getActionUrl(payment)
+        const actionUrl = this.escapeHtml(this.getActionUrl(payment))
         const fields = payment.getContent()
+        const safeFormId = this.escapeHtml(formId)
+        const safeSubmitText = this.escapeHtml(submitText)
 
-        let html = `<form id="${formId}" method="post" action="${actionUrl}">\n`
+        let html = `<form id="${safeFormId}" method="post" action="${actionUrl}">\n`
         for (const [name, value] of Object.entries(fields)) {
-            html += `    <input type="hidden" name="${name}" value="${value}">\n`
+            const safeName = this.escapeHtml(String(name))
+            const safeValue = this.escapeHtml(String(value))
+            html += `    <input type="hidden" name="${safeName}" value="${safeValue}">\n`
         }
-        html += `    <button type="submit">${submitText}</button>\n`
+        html += `    <button type="submit">${safeSubmitText}</button>\n`
         html += `</form>`
 
         return html
@@ -45,8 +64,10 @@ export class FormBuilder {
      * @returns A full HTML page string with auto-submit script
      */
     public autoSubmit(payment: Content, formId: string = 'ecpay-form', loadingText: string = '正在導向綠界付款頁面，請稍候...'): string {
-        const actionUrl = this.getActionUrl(payment)
+        const actionUrl = this.escapeHtml(this.getActionUrl(payment))
         const fields = payment.getContent()
+        const safeFormId = this.escapeHtml(formId)
+        const safeLoadingText = this.escapeHtml(loadingText)
 
         let html = `<!DOCTYPE html>
 <html>
@@ -64,17 +85,19 @@ export class FormBuilder {
 <body>
     <div class="loading">
         <div class="spinner"></div>
-        <p>${loadingText}</p>
+        <p>${safeLoadingText}</p>
     </div>
-    <form id="${formId}" method="post" action="${actionUrl}" style="display:none;">\n`
+    <form id="${safeFormId}" method="post" action="${actionUrl}" style="display:none;">\n`
 
         for (const [name, value] of Object.entries(fields)) {
-            html += `        <input type="hidden" name="${name}" value="${value}">\n`
+            const safeName = this.escapeHtml(String(name))
+            const safeValue = this.escapeHtml(String(value))
+            html += `        <input type="hidden" name="${safeName}" value="${safeValue}">\n`
         }
 
         html += `    </form>
     <script>
-        document.getElementById("${formId}").submit();
+        document.getElementById("${safeFormId}").submit();
     </script>
 </body>
 </html>`

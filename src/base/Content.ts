@@ -3,6 +3,7 @@ import { EncryptType } from '../enums/EncryptType'
 import { PaymentError } from '../errors/PaymentError'
 import { IPaymentCommand } from '../interfaces/IPaymentCommand'
 import { CheckMacEncoder } from '../security/CheckMacEncoder'
+import { formatEcPayDate } from '../utils/dateUtils'
 
 /**
  * Content
@@ -22,7 +23,7 @@ export abstract class Content implements IPaymentCommand {
     protected choosePayment: ChoosePayment = ChoosePayment.ALL
     protected encryptType: EncryptType = EncryptType.SHA256
 
-    protected content: Record<string, any> = {}
+    protected content: Record<string, unknown> = {}
     protected encoder: CheckMacEncoder | null = null
 
     constructor(merchantID: string = '', hashKey: string = '', hashIV: string = '') {
@@ -34,18 +35,10 @@ export abstract class Content implements IPaymentCommand {
     }
 
     protected initContent(): void {
-        const date = new Date()
-        const yyyy = date.getFullYear()
-        const mm = String(date.getMonth() + 1).padStart(2, '0')
-        const dd = String(date.getDate()).padStart(2, '0')
-        const hh = String(date.getHours()).padStart(2, '0')
-        const ii = String(date.getMinutes()).padStart(2, '0')
-        const ss = String(date.getSeconds()).padStart(2, '0')
-
         this.content = {
             MerchantID: this.merchantID,
             MerchantTradeNo: '',
-            MerchantTradeDate: `${yyyy}/${mm}/${dd} ${hh}:${ii}:${ss}`,
+            MerchantTradeDate: formatEcPayDate(),
             PaymentType: 'aio',
             TotalAmount: 0,
             TradeDesc: '',
@@ -103,13 +96,7 @@ export abstract class Content implements IPaymentCommand {
      */
     public setMerchantTradeDate(date: Date | string): this {
         if (date instanceof Date) {
-            const yyyy = date.getFullYear()
-            const mm = String(date.getMonth() + 1).padStart(2, '0')
-            const dd = String(date.getDate()).padStart(2, '0')
-            const hh = String(date.getHours()).padStart(2, '0')
-            const ii = String(date.getMinutes()).padStart(2, '0')
-            const ss = String(date.getSeconds()).padStart(2, '0')
-            this.content.MerchantTradeDate = `${yyyy}/${mm}/${dd} ${hh}:${ii}:${ss}`
+            this.content.MerchantTradeDate = formatEcPayDate(date)
         } else {
             this.content.MerchantTradeDate = date
         }
@@ -250,7 +237,7 @@ export abstract class Content implements IPaymentCommand {
      * Get the final payload for the API request.
      * This triggers validation and synchronizes fields.
      */
-    public getPayload(): Record<string, any> {
+    public getPayload(): Record<string, unknown> {
         this.validate()
 
         // Sync MerchantID
@@ -262,7 +249,7 @@ export abstract class Content implements IPaymentCommand {
     /**
      * Get the payload signed with CheckMacValue.
      */
-    public getContent(): Record<string, any> {
+    public getContent(): Record<string, unknown> {
         const payload = this.getPayload()
         const encoder = this.getEncoder()
         return encoder.encodePayload(payload)

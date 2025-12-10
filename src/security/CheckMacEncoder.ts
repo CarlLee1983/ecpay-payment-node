@@ -7,6 +7,19 @@ import { PaymentError } from '../errors/PaymentError'
  *
  * Responsible for generating and verifying the CheckMacValue (checksum)
  * for ECPay Security.
+ *
+ * @example
+ * ```typescript
+ * const encoder = new CheckMacEncoder(hashKey, hashIV, EncryptType.SHA256)
+ *
+ * // 產生含有 CheckMacValue 的 payload
+ * const signedPayload = encoder.encodePayload(payload)
+ *
+ * // 驗證回傳資料的 CheckMacValue
+ * if (encoder.verifyResponse(responseData)) {
+ *   console.log('驗證成功')
+ * }
+ * ```
  */
 export class CheckMacEncoder {
     private readonly hashKey: string
@@ -36,7 +49,7 @@ export class CheckMacEncoder {
      * @param payload - The data to encode
      * @returns New object with CheckMacValue appended
      */
-    encodePayload(payload: Record<string, any>): Record<string, any> {
+    encodePayload(payload: Record<string, unknown>): Record<string, unknown> {
         const data = { ...payload }
         delete data.CheckMacValue
 
@@ -50,7 +63,7 @@ export class CheckMacEncoder {
      * @param responseData - The data received from ECPay
      * @returns true if valid, false otherwise
      */
-    verifyResponse(responseData: Record<string, any>): boolean {
+    verifyResponse(responseData: Record<string, unknown>): boolean {
         if (!responseData.CheckMacValue) {
             return false
         }
@@ -71,7 +84,7 @@ export class CheckMacEncoder {
      * @returns The original data if valid
      * @throws {PaymentError} If CheckMacValue verification fails
      */
-    verifyOrFail(responseData: Record<string, any>): Record<string, any> {
+    verifyOrFail(responseData: Record<string, unknown>): Record<string, unknown> {
         if (!this.verifyResponse(responseData)) {
             throw PaymentError.checkMacValueFailed()
         }
@@ -90,7 +103,7 @@ export class CheckMacEncoder {
      * 6. Replace specific characters to match .NET encoding
      * 7. Hash (SHA256 or MD5) -> Upper case
      */
-    generateCheckMacValue(data: Record<string, any>): string {
+    generateCheckMacValue(data: Record<string, unknown>): string {
         // 1. 依照參數名稱字母排序 (A-Z)
         const sortedKeys = Object.keys(data).sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()))
 
