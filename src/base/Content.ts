@@ -258,7 +258,8 @@ export abstract class Content implements IPaymentCommand {
     protected validateBaseParam(): void {
         if (!this.merchantID) throw PaymentError.required('MerchantID')
         if (!this.content.MerchantTradeNo) throw PaymentError.required('MerchantTradeNo')
-        if (!this.content.TotalAmount || this.content.TotalAmount <= 0) throw PaymentError.required('TotalAmount')
+        const totalAmount = this.content.TotalAmount as number
+        if (!totalAmount || totalAmount <= 0) throw PaymentError.required('TotalAmount')
         if (!this.content.TradeDesc) throw PaymentError.required('TradeDesc')
         if (!this.content.ItemName) throw PaymentError.required('ItemName')
         if (!this.content.ReturnURL) throw PaymentError.required('ReturnURL')
