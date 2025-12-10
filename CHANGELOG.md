@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/CarlLee1983/ecpay-payment-node/compare/v1.1.0...v1.2.0) (2025-12-10)
+
+
+### Features
+
+* Enhance EcPayClient with options interface and timeout handling ([09d6763](https://github.com/CarlLee1983/ecpay-payment-node/commit/09d67636700d960ab0e3e6100742c3ffa27c6779))
+
 ## [1.1.0](https://github.com/CarlLee1983/ecpay-payment-node/compare/v1.0.0...v1.1.0) (2025-12-08)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "ecpay-payment-node",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "ECPay Payment Gateway SDK for Node.js (Bun-compatible)",
   "repository": {
     "type": "git",
