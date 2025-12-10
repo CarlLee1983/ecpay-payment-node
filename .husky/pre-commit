@@ -1,5 +1,10 @@
+#!/bin/sh
+
+# 載入 bun 環境
+export PATH="$HOME/.bun/bin:$PATH"
+
 # 執行 lint-staged（檢查並修正暫存的檔案）
-bunx lint-staged
+bun x lint-staged
 
 # 執行 TypeScript 型別檢查
 bun run typecheck
