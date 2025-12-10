@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/CarlLee1983/ecpay-payment-node/compare/v1.2.0...v1.2.1) (2025-12-10)
+
+
+### Bug Fixes
+
+* Refactor TotalAmount validation in Content class ([6e31370](https://github.com/CarlLee1983/ecpay-payment-node/commit/6e313706435aa05317dff44960235c3a2d338111))
+
 ## [1.2.0](https://github.com/CarlLee1983/ecpay-payment-node/compare/v1.1.0...v1.2.0) (2025-12-10)
 
 
