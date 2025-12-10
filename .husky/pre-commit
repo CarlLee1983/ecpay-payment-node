@@ -1,0 +1,8 @@
+# 執行 lint-staged（檢查並修正暫存的檔案）
+bunx lint-staged
+
+# 執行 TypeScript 型別檢查
+bun run typecheck
+
+# 執行測試
+bun test

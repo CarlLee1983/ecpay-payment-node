@@ -1,0 +1,40 @@
+#!/bin/sh
+
+# 讀取 commit message
+commit_msg=$(cat "$1")
+
+# 檢查 commit message 格式
+# 格式: <type>: [<scope>] <subject>
+# type: feat, fix, docs, style, refactor, perf, test, chore, revert, build, 3rd
+
+pattern="^(feat|fix|docs|style|refactor|perf|test|chore|revert|build|3rd)(\(.+\))?:\s*(\[.+\])?\s*.+"
+
+if ! echo "$commit_msg" | grep -qE "$pattern"; then
+  echo ""
+  echo "❌ Commit message 格式錯誤！"
+  echo ""
+  echo "正確格式: <type>: [<scope>] <subject>"
+  echo ""
+  echo "type 必須是以下之一:"
+  echo "  feat     - 新增/修改功能"
+  echo "  fix      - Bug 修復"
+  echo "  docs     - 文件改變"
+  echo "  style    - 程式碼格式改變（不影響運行）"
+  echo "  refactor - 功能重構"
+  echo "  perf     - 性能優化"
+  echo "  test     - 增加測試"
+  echo "  chore    - 建構程序或輔助工具變動"
+  echo "  revert   - 撤銷回覆先前的 commit"
+  echo "  build    - 改變 build 工具"
+  echo "  3rd      - 增加第三方"
+  echo ""
+  echo "範例:"
+  echo "  feat: [web] implementation login api function"
+  echo "  fix: 修復付款金額驗證錯誤"
+  echo "  docs: 更新 README 使用說明"
+  echo ""
+  exit 1
+fi
+
+echo "✅ Commit message 格式正確"
+
