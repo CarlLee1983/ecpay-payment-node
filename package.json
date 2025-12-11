@@ -1,6 +1,6 @@
 {
   "name": "ecpay-payment-node",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Unofficial ECPay (綠界科技) Payment Gateway SDK for Node.js and Bun. Supports credit card, ATM, CVS, Apple Pay, and more. Full TypeScript support with ESM/CJS compatibility.",
   "repository": {
     "type": "git",
