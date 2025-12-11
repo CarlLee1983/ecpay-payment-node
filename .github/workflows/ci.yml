@@ -49,7 +49,7 @@ jobs:
           test -f dist/esm/index.js
           echo "=== CJS ==="
           ls -la dist/cjs/
-          test -f dist/cjs/index.js
+          test -f dist/cjs/index.cjs
           echo "=== Types ==="
           ls -la dist/types/
           test -f dist/types/index.d.ts
