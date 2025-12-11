@@ -1,0 +1,17 @@
+# Bun 專案配置文件
+# 參考: https://bun.sh/docs/cli/bunfig
+
+# 安裝配置
+[install]
+# 自動安裝 peer dependencies
+auto = true
+# 使用生產環境依賴（安裝時不包含 devDependencies）
+production = false
+# 凍結 lockfile（確保版本一致性）
+frozenLockfile = false
+
+# 測試配置
+[test]
+# 測試超時時間（毫秒）
+timeout = 10000
+

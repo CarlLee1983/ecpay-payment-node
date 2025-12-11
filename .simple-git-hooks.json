@@ -1,0 +1,4 @@
+{
+  "pre-commit": "bun x lint-staged && bun run typecheck && bun test",
+  "commit-msg": "sh scripts/validate-commit-msg.sh \"$1\""
+}
