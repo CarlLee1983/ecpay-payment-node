@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.3](https://github.com/CarlLee1983/ecpay-payment-node/compare/v1.2.2...v1.2.3) (2025-12-11)
+
+
+### Bug Fixes
+
+* Update CI workflow to reflect .cjs file extension for CommonJS output ([305fb68](https://github.com/CarlLee1983/ecpay-payment-node/commit/305fb683936223698a065368960b50ab0485b6ee))
+
 ## [1.2.2](https://github.com/CarlLee1983/ecpay-payment-node/compare/v1.2.1...v1.2.2) (2025-12-11)
 
 
